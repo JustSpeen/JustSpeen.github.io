@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Speen — Game Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0c;--surface:#111116;--border:#1e1e28;--accent:#7fffb2;--text:#e2e2e8;--muted:#6b6b80;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 4rem 6rem;position:relative;overflow:hidden;}
+#c{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.15;display:block;}
+.hero-content{position:relative;z-index:1;}
+.eyebrow{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;}
+.hero-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.5rem,9vw,8rem);line-height:0.92;letter-spacing:-0.03em;margin-bottom:2rem;}
+.hero-title span{color:var(--accent);}
+.hero-desc{max-width:480px;font-size:1rem;line-height:1.75;color:var(--muted);}
+.section{padding:7rem 4rem;border-top:1px solid var(--border);}
+.label{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;}
+h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-0.02em;line-height:1.05;margin-bottom:1.5rem;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3rem;}
+.about-text p{color:var(--muted);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;}
+.about-text p strong{color:var(--text);font-weight:400;}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
+.skill{background:var(--surface);padding:1.5rem;}
+.skill.wide{grid-column:span 2;}
+.skill-icon{font-size:1.3rem;margin-bottom:0.6rem;}
+.skill-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;margin-bottom:0.4rem;}
+.skill-desc{font-size:0.78rem;color:var(--muted);line-height:1.55;}
+.proj-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:2rem;}
+.metas{display:flex;gap:2.5rem;}
+.meta{text-align:right;}
+.meta-l{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.2rem;}
+.meta-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;}
+.gallery{display:grid;grid-template-columns:2fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:3rem;}
+.gi{background:var(--surface);overflow:hidden;position:relative;}
+.gi.main{min-height:460px;grid-row:span 2;}
+.gi:not(.main){min-height:229px;}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;filter:saturate(0.85);}
+.gi:hover img{transform:scale(1.04);filter:saturate(1.1);}
+.gcap{position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(to top,rgba(0,0,0,0.75),transparent);font-family:'Space Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.55);letter-spacing:0.08em;text-transform:uppercase;opacity:0;transition:opacity 0.3s;}
+.gi:hover .gcap{opacity:1;}
+.biomes{display:flex;gap:1.5rem;flex-wrap:wrap;padding:1.1rem 1.4rem;border:1px solid var(--border);background:var(--surface);margin-bottom:4rem;}
+.biome{display:flex;align-items:center;gap:0.45rem;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;}
+.bd{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:4rem;}
+.tc{background:var(--surface);padding:2rem 1.75rem;position:relative;overflow:hidden;}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.tc:hover::before{transform:scaleX(1);}
+.tn{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--accent);letter-spacing:0.2em;margin-bottom:0.9rem;}
+.tc h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.65rem;}
+.tc p{font-size:0.82rem;color:var(--muted);line-height:1.65;}
+.tc code{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--accent);background:rgba(127,255,178,0.08);padding:0.1em 0.3em;}
+.insp{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:4rem;}
+.insp-img{overflow:hidden;min-height:360px;}
+.insp-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.7);transition:filter 0.3s;}
+.insp-img:hover img{filter:saturate(1);}
+.insp-desc{background:var(--surface);padding:2.5rem 2rem;display:flex;flex-direction:column;justify-content:center;}
+.insp-desc h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.3rem;margin-bottom:0.75rem;}
+.insp-desc p{font-size:0.85rem;color:var(--muted);line-height:1.75;margin-bottom:1.25rem;}
+.params{display:flex;flex-direction:column;}
+.param{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
+.pn{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+.pv{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--accent);}
+.code-block{border:1px solid var(--border);background:var(--surface);margin-bottom:4rem;overflow:hidden;}
+.code-top{display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.5rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);}
+.dots{display:flex;gap:0.35rem;}
+.dots span{width:9px;height:9px;border-radius:50%;background:var(--border);}
+.cfile{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);}
+.code-body{padding:1.5rem 1.75rem;overflow-x:auto;}
+pre{font-family:'Space Mono',monospace;font-size:0.72rem;line-height:1.85;color:#9090a8;}
+.kw{color:#7fffb2;}.fn{color:#79c0ff;}.cm{color:#44445a;font-style:italic;}
+.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin:2.5rem 0 0;}
+.fc{background:var(--surface);padding:2.5rem 2rem;}
+.fera{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.65rem;}
+.fc h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:0.65rem;}
+.fc p{font-size:0.84rem;color:var(--muted);line-height:1.7;}
+.unote{padding:1.5rem 2rem;border:1px solid var(--border);border-top:none;background:var(--surface);}
+.unote p{font-size:0.85rem;color:var(--muted);line-height:1.75;}
+.unote strong{color:var(--text);font-weight:400;}
+.contact{border-top:1px solid var(--border);text-align:center;padding:8rem 4rem;}
+.contact h2{margin-bottom:1rem;}
+.contact p{color:var(--muted);font-size:0.95rem;max-width:380px;margin:0 auto 2.5rem;line-height:1.75;}
+.cemail{font-family:'Space Mono',monospace;font-size:0.95rem;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(127,255,178,0.3);padding-bottom:2px;transition:border-color 0.2s;}
+.cemail:hover{border-color:var(--accent);}
+footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+footer span{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.07em;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+@media(max-width:860px){
+  .hero{padding:0 1.5rem 5rem;}
+  .section{padding:5rem 1.5rem;}
+  .about-grid,.insp,.fit-grid{grid-template-columns:1fr;}
+  .gallery{grid-template-columns:1fr;}
+  .gi.main{grid-row:auto;min-height:300px;}
+  .tech-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:1rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <canvas id="c"></canvas>
+  <div class="hero-content">
+    <div class="eyebrow">Game Developer — Unity · Unreal · C# · Procedural Systems</div>
+    <h1 class="hero-title">Gameplay.<br>Design.<br><span>Systems.</span></h1>
+    <p class="hero-desc">Polyvalent game developer combining programming, game design, and UI/UX — building the worlds, tools, and systems that make games feel alive.</p>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="label">// 01 — About</div>
+  <h2>Programmer who<br>thinks like an engineer.</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I enjoy building game systems from the ground up — systems that not only work reliably but feel good to interact with. I try to bridge <strong>technical implementation</strong> and <strong>player experience</strong>, which helps me contribute whether I'm working on gameplay code, sketching level layouts, or iterating on UI.</p>
+      <p>I work primarily in <strong>Unity 6 (C#)</strong> and have been exploring procedural generation, runtime mesh creation, and editor tooling. I also have <strong>some knowledge of Unreal Engine</strong> and am actively learning more.</p>
+      <p>I also have a <strong>genuine interest in history</strong> — particularly the medieval period and WW2 — which I think helps when working on games that care about authenticity and atmosphere.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill"><div class="skill-icon">⚙️</div><div class="skill-title">Gameplay Programming</div><div class="skill-desc">Systems design, C# scripting, Unity editor tooling, procedural generation</div></div>
+      <div class="skill"><div class="skill-icon">🗺️</div><div class="skill-title">Game &amp; Level Design</div><div class="skill-desc">Spatial flow, biome design, emergent environments, player-centric layout</div></div>
+      <div class="skill"><div class="skill-icon">🖥️</div><div class="skill-title">UI / UX</div><div class="skill-desc">In-game interfaces, HUD design, feedback clarity, menu systems</div></div>
+      <div class="skill"><div class="skill-icon">🔷</div><div class="skill-title">Unreal Engine</div><div class="skill-desc">Blueprints, C++ fundamentals, Nanite &amp; Lumen — actively learning</div></div>
+      <div class="skill wide"><div class="skill-icon">📚</div><div class="skill-title">Historical Knowledge</div><div class="skill-desc">Genuine interest in medieval and WW2 history — tactics, equipment, geography, culture. Useful when working on games that prioritise authenticity and atmosphere.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="project">
+  <div class="proj-header reveal">
+    <div>
+      <div class="label">// 02 — Featured Project</div>
+      <h2>Procedural<br>Terrain Generator</h2>
+    </div>
+    <div class="metas">
+      <div class="meta"><div class="meta-l">Engine</div><div class="meta-v">Unity 6</div></div>
+      <div class="meta"><div class="meta-l">Language</div><div class="meta-v">C#</div></div>
+      <div class="meta"><div class="meta-l">Type</div><div class="meta-v">Systems / Tools</div></div>
+    </div>
+  </div>
+  <div class="gallery reveal">
+    <div class="gi main"><img src="Capture_d_écran_2026-03-19_143749.png" alt="Terrain with biome layers"><div class="gcap">Biome-layered terrain — procedurally generated</div></div>
+    <div class="gi"><img src="Capture_d_écran_2026-03-19_144101.png" alt="Wireframe mesh"><div class="gcap">Wireframe — mesh geometry</div></div>
+    <div class="gi"><img src="Capture_d_écran_2026-03-19_143727.png" alt="Unity Inspector"><div class="gcap">Inspector — configurable biome layers</div></div>
+  </div>
+  <div class="biomes reveal">
+    <div class="biome"><div class="bd" style="background:#e8eaf0"></div>Snow</div>
+    <div class="biome"><div class="bd" style="background:#6b7280"></div>Rock</div>
+    <div class="biome"><div class="bd" style="background:#16a34a"></div>Forest</div>
+    <div class="biome"><div class="bd" style="background:#4ade80"></div>Grassland</div>
+    <div class="biome"><div class="bd" style="background:#eab308"></div>Sand</div>
+    <div class="biome"><div class="bd" style="background:#3b82f6"></div>Water</div>
+  </div>
+</section>
+
+<section class="section" id="technical">
+  <div class="label">// 03 — Technical Breakdown</div>
+  <div class="tech-grid reveal">
+    <div class="tc"><div class="tn">01</div><h3>Octave Perlin Noise</h3><p>Multi-layered noise using <code>Mathf.PerlinNoise</code> with configurable <code>octaves</code>, <code>persistence</code>, and <code>lacunarity</code>. Each octave adds finer detail while preserving macro terrain shapes.</p></div>
+    <div class="tc"><div class="tn">02</div><h3>Height-Based Biome System</h3><p>Terrain layers assigned by normalised height thresholds. Each <code>TerrainLayer</code> defines a cutoff and color — fully designer-configurable with live preview, no code edits required.</p></div>
+    <div class="tc"><div class="tn">03</div><h3>Procedural Mesh Generation</h3><p>Runtime-generated mesh with vertices displaced along Y via the noise map. A <code>MeshCollider</code> is built from the same data — physics accuracy always matches visuals.</p></div>
+    <div class="tc"><div class="tn">04</div><h3>Seed &amp; Offset System</h3><p>Every generation driven by a <code>seed</code> and <code>offset</code> vector — reproducible worlds and infinite panning. Same seed always yields identical terrain, critical for save systems.</p></div>
+    <div class="tc"><div class="tn">05</div><h3>Prop Spawning</h3><p>A <code>SpawnProps(biome)</code> method distributes objects using the noise map as a probability field. Props placed by biome type and height — no manual placement required.</p></div>
+    <div class="tc"><div class="tn">06</div><h3>Multi-Mode Display</h3><p>Three draw modes: <code>NoiseMap</code> (debug heightmap), <code>ColourMap</code> (flat biome view), and <code>Mesh</code> (full 3D). Switchable live — built for fast design iteration.</p></div>
+  </div>
+  <div class="insp reveal">
+    <div class="insp-img"><img src="Capture_d_écran_2026-03-19_143727.png" alt="Inspector parameters"></div>
+    <div class="insp-desc">
+      <h3>Designer-Friendly<br>Parameter Exposure</h3>
+      <p>All generation parameters are exposed in the Unity Inspector — no code edits needed to iterate on terrain shape or biomes. Tools should empower designers, not block them.</p>
+      <div class="params">
+        <div class="param"><span class="pn">Noise Scale</span><span class="pv">200</span></div>
+        <div class="param"><span class="pn">Octaves</span><span class="pv">20</span></div>
+        <div class="param"><span class="pn">Persistence</span><span class="pv">0.6</span></div>
+        <div class="param"><span class="pn">Lacunarity</span><span class="pv">1.5</span></div>
+        <div class="param"><span class="pn">Terrain Layers</span><span class="pv">6 biomes</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="code-block reveal">
+    <div class="code-top"><div class="dots"><span></span><span></span><span></span></div><span class="cfile">Noise.cs — GenerateNoiseMap()</span><span></span></div>
+    <div class="code-body"><pre><span class="cm">// Multi-octave Perlin noise with normalized output</span>
+<span class="kw">for</span> (int y = 0; y &lt; mapHeight; y++) {
+  <span class="kw">for</span> (int x = 0; x &lt; mapWidth; x++) {
+    float amplitude = 1;
+    float frequency = 1;
+    float noiseHeight = 0;
+
+    <span class="kw">for</span> (int i = 0; i &lt; octaves; i++) {
+      float sampleX = (x - halfWidth) / scale * frequency + octaveOffsets[i].x;
+      float sampleY = (y - halfHeight) / scale * frequency + octaveOffsets[i].y;
+
+      float perlinValue = Mathf.<span class="fn">PerlinNoise</span>(sampleX, sampleY) * 2 - 1;
+      noiseHeight += perlinValue * amplitude;
+
+      amplitude *= persistance;
+      frequency *= lacunarity;
+    }
+    noiseMap[x, y] = noiseHeight;
+  }
+}
+<span class="cm">// Normalize to [0,1] range</span>
+noiseMap[x, y] = Mathf.<span class="fn">InverseLerp</span>(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);</pre></div>
+  </div>
+</section>
+
+<section class="section" id="fit">
+  <div class="label">// 04 — Studio Fit</div>
+  <h2>Adaptable to many contexts.</h2>
+  <p style="color:var(--muted);max-width:520px;line-height:1.75;margin-top:1rem;font-size:0.95rem;">Procedural terrain generation is a useful foundation for many types of games — open worlds, strategy titles, multiplayer maps. The system is flexible enough to adapt to different settings and gameplay needs.</p>
+  <div class="fit-grid reveal">
+    <div class="fc"><div class="fera">⚔️ Medieval</div><h3>Open Worlds &amp;<br>Kingdom Terrain</h3><p>Procedurally generated landscapes for exploration games, strategy titles, and RPGs — forests, ridgelines, river valleys. The biome system adapts well to varied historical geography.</p></div>
+    <div class="fc"><div class="fera">🪖 WW2</div><h3>Campaign Maps &amp;<br>Tactical Environments</h3><p>Terrain tools for varied battle environments. Seed-based generation enables consistent, reproducible maps — useful for both single-player campaigns and multiplayer scenarios.</p></div>
+  </div>
+  <div class="unote reveal">
+    <p><strong>On Unreal Engine:</strong> My primary work is in Unity, but the underlying concepts — noise functions, mesh generation, height-based mapping — are engine-agnostic. I have some familiarity with Unreal and am working on building that up. The math transfers; the API is different but learnable.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="label" style="display:inline-block">// 05 — Get in Touch</div>
+  <h2>Let's build<br>something.</h2>
+  <p>Open to junior positions, internships, and contracts at studios working on historical, strategy, or open-world titles.</p>
+  <a href="mailto:siege.editor@gmail.com" class="cemail">siege.editor@gmail.com</a>
+</section>
+
+<footer>
+  <span>Just Speen — Game Developer Portfolio</span>
+  <span>Unity · Unreal · C# · 2026</span>
+</footer>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();
+window.addEventListener('resize',resize);
+function noise(x,y,t){
+  return Math.sin(x*0.008+t*0.3)*Math.cos(y*0.012+t*0.2)
+        +Math.sin(x*0.02+y*0.015+t*0.15)*0.5
+        +Math.cos(x*0.04-y*0.03+t*0.1)*0.25;
+}
+let t=0;
+function draw(){
+  const w=canvas.width,h=canvas.height;
+  const cols=80,rows=50;
+  const cw=w/cols,ch=h/rows;
+  ctx.clearRect(0,0,w,h);
+  for(let r=0;r<rows;r++){
+    for(let cc=0;cc<cols;cc++){
+      const n=(noise(cc,r,t)+1.5)/3;
+      let color;
+      if(n>0.85)color='#e8eaf0';
+      else if(n>0.65)color='#4b5563';
+      else if(n>0.45)color='#15803d';
+      else if(n>0.30)color='#4ade80';
+      else if(n>0.20)color='#ca8a04';
+      else color='#1d4ed8';
+      ctx.fillStyle=color;
+      ctx.fillRect(cc*cw,r*ch,cw+1,ch+1);
+    }
+  }
+  t+=0.004;
+  requestAnimationFrame(draw);
+}
+draw();
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
